@@ -19,7 +19,7 @@ void loop() {
     int in = analogRead(AIN);
     int wait = 1000, wait2 = 50;
     int t = millis();
-    if(t - ts < wait*0.13) {
+    if(t - ts < wait*0.12) {
         // 12% av tiden hög
         analogWrite(AOUT, 255);
     }
