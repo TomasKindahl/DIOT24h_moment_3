@@ -3,8 +3,9 @@
 ArduinoLEDMatrix matrix;
 
 void setup() {
-  Serial.begin(115200);
-  matrix.begin();
+    Serial.begin(115200);
+    pinMode(4, INPUT_PULLUP);
+    matrix.begin();
 }
 
 const uint32_t happy[] = {
@@ -17,11 +18,18 @@ const uint32_t heart[] = {
     0x44042081,
     0x100a0040
 };
-  
-void loop(){
-  matrix.loadFrame(happy);
-  delay(500);
 
-  matrix.loadFrame(heart);
-  delay(500);
+int happyOn = 1;
+
+void loop(){
+    if(digitalRead(4) == LOW) {
+        happyOn = 1 - happyOn; 
+    }
+    if(happyOn == 1) {
+        matrix.loadFrame(happy);
+    }
+    else {
+        matrix.loadFrame(heart);
+    }
+    delay(200);
 }
